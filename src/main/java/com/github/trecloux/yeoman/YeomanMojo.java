@@ -1,5 +1,8 @@
 package com.github.trecloux.yeoman;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.maven.plugin.AbstractMojo;
@@ -7,9 +10,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-
-import java.io.File;
-import java.io.IOException;
 
 /*
  * Copyright 2013 Thomas Recloux
@@ -69,10 +69,10 @@ public class YeomanMojo extends AbstractMojo {
     }
     void grunt() throws MojoExecutionException {
         logToolVersion("grunt");
+        logAndExecuteCommand("grunt " + gruntBuildArgs);
         if (!skipTests) {
             logAndExecuteCommand("grunt " + gruntTestArgs);
         }
-        logAndExecuteCommand("grunt " + gruntBuildArgs);
     }
 
     void logToolVersion(final String toolName) throws MojoExecutionException {
